@@ -1,0 +1,1427 @@
+/* ============================================
+   PORTFÓLIO — DIEGO GOBBIS
+   Folha de Estilos Principal
+   Todos os comentários estão em português
+============================================ */
+
+
+/* ============================================
+   VARIÁVEIS GLOBAIS (Design Tokens)
+============================================ */
+:root {
+    /* Cores de fundo */
+    --bg-primario:      #050816;
+    --bg-secundario:    #0d1117;
+    --bg-card:          #161b22;
+    --bg-card-hover:    #1c2330;
+
+    /* Cor de destaque (azul-roxo) */
+    --accent:           #3b82f6;
+    --accent-hover:     #2563eb;
+    --accent-glow:      rgba(59, 130, 246, 0.25);
+    --accent-secundario:#8b5cf6;
+
+    /* Cores de texto */
+    --texto-primario:   #e6edf3;
+    --texto-secundario: #8b949e;
+    --texto-mudo:       #484f58;
+
+    /* Bordas */
+    --borda:            rgba(48, 54, 61, 0.8);
+    --borda-accent:     rgba(59, 130, 246, 0.3);
+
+    /* Gradientes reutilizáveis */
+    --gradiente-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+
+    /* Gradiente exclusivo para o efeito de slide dos botões ao hover */
+    --gradiente-hover:  linear-gradient(135deg, #10b981, #0ea5e9);
+
+    /* Tipografia */
+    --fonte-ui:   'Inter',     sans-serif;
+    --fonte-mono: 'Fira Code', monospace;
+
+    /* Padding padrão de seção */
+    --padding-secao: 100px 0;
+
+    /* Transição padrão */
+    --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Raios de borda */
+    --radius:    12px;
+    --radius-lg: 20px;
+}
+
+
+/* ============================================
+   RESET E BASE
+============================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--fonte-ui);
+    background-color: var(--bg-primario);
+    color: var(--texto-primario);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Barra de rolagem customizada */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secundario); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* Cor de seleção de texto */
+::selection {
+    background: var(--accent-glow);
+    color: var(--texto-primario);
+}
+
+img { display: block; max-width: 100%; }
+a   { text-decoration: none; }
+ul  { list-style: none; }
+button { font-family: inherit; }
+
+
+/* ============================================
+   UTILITÁRIOS
+============================================ */
+
+/* Container centralizado com padding lateral */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Botões base */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-family: var(--fonte-ui);
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transicao);
+    white-space: nowrap;
+}
+
+/* Botão preenchido com gradiente */
+.btn-primary {
+    background: var(--gradiente-accent);
+    color: #fff;
+    box-shadow: 0 4px 24px var(--accent-glow);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--accent-glow);
+}
+
+/* Botão com borda + efeito de preenchimento deslizante da esquerda para a direita */
+.btn-outline {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    z-index: 0;
+}
+
+/* Camada de fundo que desliza ao hover */
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradiente-hover);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.btn-outline:hover::before { transform: translateX(0); }
+.btn-outline:hover {
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--accent-glow);
+}
+
+/* Botão que ocupa 100% da largura */
+.btn-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Botão de download do CV — estilo sutil diferenciado */
+.btn-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-family: var(--fonte-ui);
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px dashed rgba(139, 92, 246, 0.6);
+    color: #a78bfa;
+    background: rgba(139, 92, 246, 0.06);
+    cursor: pointer;
+    transition: var(--transicao);
+    white-space: nowrap;
+    text-decoration: none;
+}
+.btn-cv:hover {
+    border-color: #a78bfa;
+    background: rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+}
+
+
+/* ============================================
+   CABEÇALHO DE SEÇÃO (reutilizado em todas)
+============================================ */
+.section-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+/* Tag estilo código acima do título */
+.section-tag {
+    font-family: var(--fonte-mono);
+    font-size: 14px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    font-size: 17px;
+    color: var(--texto-secundario);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+/* ============================================
+   ANIMAÇÕES DE ENTRADA (Intersection Observer)
+============================================ */
+
+/* Estado inicial: invisível e deslocado para baixo */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Estado final: visível na posição correta */
+[data-animate].visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ============================================
+   NAVBAR — NAVEGAÇÃO FIXA NO TOPO
+============================================ */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    transition: var(--transicao);
+}
+
+/* Fundo translúcido após rolar a página */
+.navbar.scrolled {
+    background: rgba(5, 8, 22, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--borda);
+    padding: 12px 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo no estilo <DG /> */
+.nav-logo {
+    font-family: var(--fonte-mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--texto-primario);
+    transition: var(--transicao);
+}
+.nav-logo:hover { color: var(--accent); }
+
+.logo-bracket { color: var(--accent); }
+
+/* Links de navegação desktop */
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: var(--transicao);
+}
+.nav-link:hover,
+.nav-link.ativo {
+    color: var(--texto-primario);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* Botão CTA da navbar — mesmo efeito de slide do btn-outline */
+.btn-nav {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: var(--transicao);
+}
+
+/* Variante outline para o botão da navbar */
+.btn-nav.btn-nav-outline {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    z-index: 0;
+}
+.btn-nav.btn-nav-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradiente-hover);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+.btn-nav.btn-nav-outline:hover::before { transform: translateX(0); }
+.btn-nav.btn-nav-outline:hover {
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+/* Hambúrguer (oculto no desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--texto-primario);
+    border-radius: 2px;
+    transition: var(--transicao);
+}
+
+/* Overlay do menu mobile */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1001;
+    backdrop-filter: blur(4px);
+}
+.menu-overlay.aberto { display: block; }
+
+/* Gaveta lateral do menu mobile */
+.menu-mobile {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-left: 1px solid var(--borda);
+    z-index: 1002;
+    padding: 80px 32px 32px;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-mobile.aberto { right: 0; }
+
+.menu-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: none;
+    color: var(--texto-secundario);
+    font-size: 20px;
+    cursor: pointer;
+    transition: var(--transicao);
+}
+.menu-close:hover { color: var(--texto-primario); }
+
+.menu-mobile ul { display: flex; flex-direction: column; gap: 8px; }
+.menu-mobile a {
+    color: var(--texto-secundario);
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: block;
+    transition: var(--transicao);
+}
+.menu-mobile a:hover {
+    color: var(--texto-primario);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+
+/* ============================================
+   HERO — SEÇÃO INICIAL
+============================================ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0 40px;
+}
+
+/* Gradiente radial duplo no fundo */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Grid de pontos decorativos */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Grid de duas colunas: texto | foto */
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Saudação em fonte mono */
+.hero-greeting {
+    font-family: var(--fonte-mono);
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.hero-greeting::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: var(--accent);
+}
+
+/* Nome principal com gradiente de texto */
+.hero-name {
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--texto-primario) 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Linha do título com cursor piscando */
+.hero-title {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 600;
+    color: var(--texto-secundario);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.typing-text   { color: var(--accent); font-family: var(--fonte-mono); }
+.typing-cursor { color: var(--accent); font-family: var(--fonte-mono); animation: piscar 1s infinite; }
+
+@keyframes piscar {
+    0%, 50%  { opacity: 1; }
+    51%, 100%{ opacity: 0; }
+}
+
+/* Badge "Disponível para estágio e CLT" com ponto verde piscando */
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #10b981;
+    margin-bottom: 20px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: piscar-dot 2s ease-in-out infinite;
+}
+
+@keyframes piscar-dot {
+    0%, 100% { opacity: 1;   transform: scale(1);   }
+    50%      { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-description {
+    font-size: 17px;
+    color: var(--texto-secundario);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+/* Ícones de redes sociais no hero */
+.hero-socials { display: flex; gap: 16px; }
+.hero-socials a {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: var(--bg-card);
+    transition: var(--transicao);
+}
+.hero-socials a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--accent-glow);
+}
+
+/* Foto de perfil com borda orgânica animada */
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+}
+
+/* Brilho radial pulsante atrás da foto */
+.hero-image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulsar-brilho 3s ease-in-out infinite;
+}
+
+@keyframes pulsar-brilho {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.05); }
+}
+
+/* Borda orgânica que muda de forma continuamente */
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    border: 3px solid var(--borda-accent);
+    animation: morfar-borda 8s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes morfar-borda {
+    0%,  100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    25%        { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50%        { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+    75%        { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+}
+
+/* Badges flutuantes ao redor da foto */
+.badge {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    animation: flutuar 3s ease-in-out infinite;
+}
+
+.badge-html  { top: 10%;    left: -15%;   color: #e34c26; animation-delay: 0s; }
+.badge-css   { bottom: 20%; right: -10%;  color: #264de4; animation-delay: 1s; }
+.badge-js    { bottom: 5%;  left: 10%;    color: #f7df1e; animation-delay: 2s; }
+.badge-react { top: 22%;    right: -18%;  color: #61dafb; animation-delay: 1.5s; }
+
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+/* Indicador de scroll animado */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-mudo);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 1;
+}
+.scroll-mouse {
+    width: 24px; height: 40px;
+    border: 2px solid var(--texto-mudo);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+.scroll-wheel {
+    width: 4px; height: 8px;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: rolar 2s infinite;
+}
+@keyframes rolar {
+    0%   { transform: translateY(0);  opacity: 1; }
+    100% { transform: translateY(12px); opacity: 0; }
+}
+
+
+/* ============================================
+   SOBRE — BIOGRAFIA E TECNOLOGIAS
+============================================ */
+.sobre {
+    padding: var(--padding-secao);
+    background: var(--bg-secundario);
+    position: relative;
+}
+
+/* Linha decorativa no topo da seção */
+.sobre::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--borda-accent), transparent);
+}
+
+/* Layout de duas colunas: texto | habilidades */
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.sobre-text p {
+    color: var(--texto-secundario);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+.sobre-text strong { color: var(--texto-primario); }
+
+/* Card de informações rápidas */
+.sobre-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 32px 0;
+    padding: 24px;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--borda);
+}
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--texto-secundario);
+}
+.info-item i { color: var(--accent); width: 16px; }
+
+/* Seção de habilidades */
+.sobre-skills h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.skills-categoria { margin-bottom: 28px; }
+
+.skills-categoria h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-mudo);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.skills-categoria h4 i { color: var(--accent); }
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Cada item de tecnologia */
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--texto-secundario);
+    transition: var(--transicao);
+    cursor: default;
+}
+.skill-item:hover {
+    border-color: var(--accent);
+    color: var(--texto-primario);
+    transform: translateY(-2px);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.skill-icon { font-size: 20px; }
+
+/* Cores características de cada tecnologia */
+.skill-icon.html     { color: #e34c26; }
+.skill-icon.css      { color: #264de4; }
+.skill-icon.js       { color: #f7df1e; }
+.skill-icon.react    { color: #61dafb; }
+
+/* Skill marcada como "em aprendizado" */
+.tag-aprendendo {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-left: 2px;
+}
+.skill-icon.tailwind { color: #38bdf8; }
+.skill-icon.api      { color: #10b981; }
+.skill-icon.firebase { color: #ff6d00; }
+.skill-icon.json     { color: #64748b; }
+.skill-icon.git      { color: #f05032; }
+.skill-icon.github   { color: #8b949e; }
+.skill-icon.figma    { color: #a259ff; }
+.skill-icon.vscode   { color: #007acc; }
+
+
+/* ============================================
+   PROJETOS — CARDS SIDE-BY-SIDE
+============================================ */
+.projetos { padding: var(--padding-secao); }
+
+/* Grade de projetos — coluna única; cada card ocupa a largura total */
+.projetos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+/* Card de projeto: imagem e texto lado a lado (layout escada) */
+.projeto-card {
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transition: var(--transicao);
+    position: relative;
+}
+
+/* Layout escada: todos os cards com imagem à esquerda, texto à direita */
+.projeto-card:hover {
+    border-color: var(--borda-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.12);
+}
+
+/* Destaque visual para o projeto principal */
+.projeto-card.destaque {
+    border-color: var(--borda-accent);
+    background: linear-gradient(135deg, var(--bg-card), rgba(59, 130, 246, 0.04));
+}
+
+/* Badge no canto superior esquerdo */
+.projeto-badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--gradiente-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+/* Área da imagem — preenche toda a altura do card ao lado do texto */
+.projeto-imagem {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+    padding: 20px;
+}
+.projeto-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.5s ease;
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.projeto-card:hover .projeto-imagem img { transform: scale(1.02); }
+
+/* Overlay escuro com links */
+.projeto-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 22, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transicao);
+    backdrop-filter: blur(4px);
+}
+.projeto-card:hover .projeto-overlay { opacity: 1; }
+
+.projeto-links { display: flex; gap: 16px; }
+
+.projeto-link {
+    width: 52px; height: 52px;
+    background: var(--bg-card);
+    border: 2px solid var(--borda-accent);
+    border-radius: 12px;
+    color: var(--texto-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: var(--transicao);
+    transform: translateY(20px);
+}
+.projeto-card:hover .projeto-link  { transform: translateY(0); }
+.projeto-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.1) !important;
+}
+
+/* Conteúdo textual do card */
+.projeto-info {
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.projeto-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.projeto-info p {
+    font-size: 14px;
+    color: var(--texto-secundario);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* Lista de funcionalidades */
+.projeto-destaques {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.projeto-destaques li {
+    font-size: 13px;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.projeto-destaques li i { color: #10b981; font-size: 11px; }
+
+/* Tags de tecnologias usadas */
+.projeto-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.projeto-tags span {
+    padding: 4px 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: var(--fonte-mono);
+}
+
+
+/* ============================================
+   MAIS PROJETOS — LINK PARA O GITHUB
+============================================ */
+.mais-projetos {
+    text-align: center;
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.mais-projetos p {
+    color: var(--texto-secundario);
+    font-size: 16px;
+    letter-spacing: 0.02em;
+}
+
+/* Botão grande estilo outline com ícone do GitHub */
+.btn-github-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: transparent;
+    color: var(--texto-primario);
+    border: 2px solid var(--borda);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--fonte-ui);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    transition: var(--transicao);
+}
+
+/* Mesmo efeito de slide dos outros botões */
+.btn-github-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradiente-hover);
+    transform: translateX(-105%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.btn-github-cta:hover::before { transform: translateX(0); }
+.btn-github-cta:hover {
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px var(--accent-glow);
+}
+
+.btn-github-cta i {
+    font-size: 22px;
+    transition: transform 0.3s ease;
+}
+
+.btn-github-cta:hover i { transform: rotate(10deg) scale(1.15); }
+
+
+/* ============================================
+   CERTIFICADOS — GRADE COM MODAL
+============================================ */
+.certificados {
+    padding: var(--padding-secao);
+    background: var(--bg-secundario);
+    position: relative;
+}
+.certificados::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--borda-accent), transparent);
+}
+
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+/* Card de certificado */
+.cert-card {
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transicao);
+    cursor: pointer;
+}
+.cert-card:hover {
+    border-color: var(--borda-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.12);
+}
+
+/* Imagem do certificado com proporção 16:10 */
+.cert-imagem {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+.cert-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.cert-card:hover .cert-imagem img { transform: scale(1.05); }
+
+/* Overlay azul ao passar o mouse */
+.cert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(59, 130, 246, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transicao);
+    color: #fff;
+    font-size: 24px;
+}
+.cert-card:hover .cert-overlay { opacity: 1; }
+
+/* Rodapé do card */
+.cert-info {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.cert-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.cert-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Modal de visualização do certificado */
+.cert-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.cert-modal.aberto { display: flex; }
+
+.cert-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+}
+.cert-modal-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+}
+.cert-modal-close {
+    position: absolute;
+    top: -48px; right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    color: var(--texto-primario);
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transicao);
+}
+.cert-modal-close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.cert-modal-content img {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ============================================
+   CONTATO — FORMULÁRIO E LINKS SOCIAIS
+============================================ */
+.contato { padding: var(--padding-secao); }
+
+/* Layout lado a lado: info | formulário */
+.contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.contato-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+.contato-info > p {
+    color: var(--texto-secundario);
+    line-height: 1.7;
+    margin-bottom: 36px;
+}
+
+.contato-links { display: flex; flex-direction: column; gap: 16px; }
+
+/* Item de link social com ícone e texto */
+.contato-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius);
+    transition: var(--transicao);
+}
+.contato-item:hover {
+    border-color: var(--borda-accent);
+    transform: translateX(6px);
+}
+
+/* Ícone colorido por rede */
+.contato-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: var(--transicao);
+}
+.contato-icon.email    { background: rgba(59, 130, 246, 0.1);  color: var(--accent); }
+.contato-icon.whatsapp { background: rgba(37, 211, 102, 0.1);  color: #25d366;       }
+.contato-icon.linkedin { background: rgba(10, 102, 194, 0.1);  color: #0a66c2;       }
+.contato-icon.github   { background: rgba(139, 148, 158, 0.1); color: #8b949e;       }
+
+.contato-item:hover .contato-icon { transform: scale(1.1); }
+
+.contato-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--texto-mudo);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+}
+.contato-value {
+    display: block;
+    font-size: 14px;
+    color: var(--texto-primario);
+    font-weight: 500;
+}
+
+/* Card do formulário */
+.contato-form-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+}
+
+.contato-form { display: flex; flex-direction: column; gap: 20px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    letter-spacing: 0.03em;
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--bg-secundario);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--texto-primario);
+    font-family: var(--fonte-ui);
+    font-size: 14px;
+    transition: var(--transicao);
+    outline: none;
+    resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--texto-mudo); }
+
+
+/* ============================================
+   RODAPÉ
+============================================ */
+.footer {
+    background: var(--bg-secundario);
+    border-top: 1px solid var(--borda);
+    padding: 32px 0;
+}
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+.footer-logo {
+    font-family: var(--fonte-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--texto-primario);
+}
+.footer-content p {
+    font-size: 14px;
+    color: var(--texto-mudo);
+}
+.footer-content p i { color: #ef4444; }
+
+.footer-socials { display: flex; gap: 12px; }
+.footer-socials a {
+    width: 36px; height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: var(--transicao);
+}
+.footer-socials a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* ============================================
+   RESPONSIVIDADE
+============================================ */
+
+/* ── Tablet grande (até 1024px) ── */
+@media (max-width: 1024px) {
+    .hero-container       { gap: 48px; }
+    .hero-image-wrapper   { width: 300px; height: 300px; }
+    .sobre-grid           { gap: 48px; }
+    .contato-grid         { gap: 48px; }
+
+    /* Projetos: escada mantida no tablet grande, só reduz padding */
+    .projeto-info { padding: 28px; }
+}
+
+/* ── Tablet (até 768px) ── */
+@media (max-width: 768px) {
+    :root { --padding-secao: 72px 0; }
+
+    /* Esconde links e botão de nav, exibe hambúrguer */
+    .nav-links, .btn-nav { display: none; }
+    .menu-toggle         { display: flex; }
+
+    /* Hero em uma coluna, foto acima */
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 48px;
+    }
+    .hero-greeting    { justify-content: center; }
+    .hero-description { margin: 0 auto 36px; }
+    .hero-buttons     { justify-content: center; }
+    .hero-socials     { justify-content: center; }
+    .hero-image       { order: -1; }
+    .hero-image-wrapper { width: 240px; height: 240px; }
+
+    /* Sobre em uma coluna */
+    .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+
+    /* Projetos: empilha imagem+texto no mobile (sem escada) */
+    .projetos-grid                              { grid-template-columns: 1fr; }
+    .projeto-card                               { grid-template-columns: 1fr; }
+    .projeto-imagem                             { min-height: 240px; padding: 16px; }
+    .projeto-info                               { padding: 24px; }
+
+    /* Contato em uma coluna */
+    .contato-grid { grid-template-columns: 1fr; gap: 48px; }
+
+    /* Rodapé empilhado */
+    .footer-content { flex-direction: column; text-align: center; }
+}
+
+/* ── Mobile (até 480px) ── */
+@media (max-width: 480px) {
+    /* Botões empilhados */
+    .hero-buttons      { flex-direction: column; align-items: center; }
+    .btn               { width: 100%; justify-content: center; }
+
+    /* Certificados em 2 colunas */
+    .certs-grid        { grid-template-columns: 1fr 1fr; }
+
+    /* Formulário com menos padding */
+    .contato-form-wrapper { padding: 24px; }
+
+    /* Oculta badges flutuantes em telas muito pequenas */
+    .badge             { display: none; }
+}

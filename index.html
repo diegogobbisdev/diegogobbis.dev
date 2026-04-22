@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diego Gobbis - Desenvolvedor Front-End. Portfólio com projetos reais em HTML, CSS e JavaScript.">
+    <title>Diego Gobbis | Desenvolvedor Front-End</title>
+
+    <!-- Fontes Google: Inter para UI, Fira Code para elementos de código -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Folha de estilos principal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR — NAVEGAÇÃO PRINCIPAL FIXADA NO TOPO
+    ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+
+            <!-- Logo em estilo de código -->
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>DG<span class="logo-bracket"> /&gt;</span>
+            </a>
+
+            <!-- Links de navegação (desktop) -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#sobre"        class="nav-link">Sobre</a></li>
+                <li><a href="#projetos"     class="nav-link">Projetos</a></li>
+                <li><a href="#certificados" class="nav-link">Certificados</a></li>
+                <li><a href="#contato"      class="nav-link">Contato</a></li>
+            </ul>
+
+            <!-- Botão de contato (desktop) — mesmo efeito de slide dos outros botões -->
+            <a href="#contato" class="btn-nav btn-nav-outline">Contato</a>
+
+            <!-- Botão hambúrguer (mobile) -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Overlay escuro ao abrir menu mobile -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- Menu deslizante lateral (mobile) -->
+    <div class="menu-mobile" id="menu-mobile">
+        <button class="menu-close" id="menu-close" aria-label="Fechar menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#certificados">Certificados</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </div>
+
+
+    <!-- ============================================
+         HERO — SEÇÃO DE APRESENTAÇÃO PRINCIPAL
+    ============================================ -->
+    <section class="hero" id="hero">
+
+        <!-- Partículas animadas no fundo -->
+        <div class="hero-particles" id="particles"></div>
+
+        <div class="hero-container">
+
+            <!-- Lado esquerdo: texto e botões -->
+            <div class="hero-content">
+                <p class="hero-greeting">Olá, eu sou</p>
+                <h1 class="hero-name">Diego Gobbis</h1>
+                <h2 class="hero-title">
+                    Desenvolvedor
+                    <span class="typing-text" id="typing-text"></span><span class="typing-cursor">|</span>
+                </h2>
+                <!-- Badge de disponibilidade — visível imediatamente ao recrutar abrir o portfólio -->
+                <div class="hero-status">
+                    <span class="status-dot"></span>
+                    Disponível para estágio e CLT
+                </div>
+
+                <p class="hero-description">
+                    Estudante de Sistemas de Informação na UEMG, construindo soluções reais
+                    com atenção a detalhe visual, responsividade e código bem estruturado.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projetos" class="btn btn-outline">
+                        Ver Projetos <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="#contato" class="btn btn-outline">
+                        Falar Comigo <i class="fas fa-paper-plane"></i>
+                    </a>
+                    <!-- Substitua o arquivo em cv/diego-gobbis-cv.pdf pelo seu currículo -->
+                    <a href="cv/Curriculo Diego Antonio Gobbis Da Silva.pdf" download class="btn btn-cv">
+                        <i class="fas fa-download"></i> Baixar CV
+                    </a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://github.com/diegogobbisdev"        target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/diegogobbis"   target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/5534997666593"           target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Lado direito: foto de perfil com badges flutuantes -->
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-glow"></div>
+                    <img src="imagens/foto perfil.jpg" alt="Diego Gobbis — Desenvolvedor Front-End" class="profile-photo">
+                    <div class="badge badge-html"><i class="fab fa-html5"></i> HTML5</div>
+                    <div class="badge badge-css"><i class="fab fa-css3-alt"></i> CSS3</div>
+                    <div class="badge badge-js"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="badge badge-react"><i class="fab fa-react"></i> React</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ============================================
+         SOBRE — QUEM SOU E MINHAS TECNOLOGIAS
+    ============================================ -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+
+            <div class="section-header" data-animate>
+                <span class="section-tag">// sobre_mim</span>
+                <h2 class="section-title">Quem sou eu?</h2>
+            </div>
+
+            <div class="sobre-grid">
+
+                <!-- Texto biográfico -->
+                <div class="sobre-text" data-animate>
+                    <p>
+                        Sou estudante de <strong>Sistemas de Informação na UEMG</strong> e atuo
+                        construindo projetos reais para praticar e evoluir como desenvolvedor front-end.
+                    </p>
+                    <p>
+                        Gosto de pegar uma ideia, organizar o fluxo da interface e entregar uma solução
+                        <strong>limpa, responsiva e fácil de usar</strong>. Já desenvolvi desde
+                        landing pages e jogos em JavaScript até sistemas com LocalStorage e
+                        integração com APIs.
+                    </p>
+                    <p>
+                        Meu objetivo é continuar crescendo como <strong>dev front-end</strong>,
+                        com atenção a detalhe visual, acessibilidade e código bem estruturado.
+                    </p>
+
+                    <!-- Informações de contato rápido -->
+                    <div class="sobre-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Ituiutaba - MG, Brasil</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Sistemas de Informação — UEMG (em andamento)</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-circle-check"></i>
+                            <span>Disponível para estágio e CLT</span>
+                        </div>
+                    </div>
+
+                    <a href="#contato" class="btn btn-outline">
+                        Vamos conversar <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Grade de tecnologias -->
+                <div class="sobre-skills" data-animate>
+                    <h3>Minhas Tecnologias</h3>
+
+                    <div class="skills-categoria">
+                        <h4><i class="fas fa-palette"></i> Frontend</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item"><i class="fab fa-html5     skill-icon html"></i><span>HTML5</span></div>
+                            <div class="skill-item"><i class="fab fa-css3-alt  skill-icon css"></i><span>CSS3</span></div>
+                            <div class="skill-item"><i class="fab fa-js        skill-icon js"></i><span>JavaScript</span></div>
+                            <div class="skill-item skill-aprendendo"><i class="fab fa-react skill-icon react"></i><span>React</span><span class="tag-aprendendo">aprendendo</span></div>
+                            <div class="skill-item"><i class="fas fa-wind      skill-icon tailwind"></i><span>Tailwind</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skills-categoria">
+                        <h4><i class="fas fa-database"></i> Integração</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item"><i class="fas fa-plug skill-icon api"></i><span>API REST</span></div>
+                            <div class="skill-item"><i class="fas fa-fire skill-icon firebase"></i><span>Firebase</span></div>
+                            <div class="skill-item"><i class="fas fa-code skill-icon json"></i><span>JSON</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skills-categoria">
+                        <h4><i class="fas fa-tools"></i> Ferramentas</h4>
+                        <div class="skills-grid">
+                            <div class="skill-item"><i class="fab fa-git-alt skill-icon git"></i><span>Git</span></div>
+                            <div class="skill-item"><i class="fab fa-github  skill-icon github"></i><span>GitHub</span></div>
+                            <div class="skill-item"><i class="fab fa-figma   skill-icon figma"></i><span>Figma</span></div>
+                            <div class="skill-item"><i class="fas fa-terminal skill-icon vscode"></i><span>VS Code</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         PROJETOS — TRABALHOS DESENVOLVIDOS
+    ============================================ -->
+    <section class="projetos" id="projetos">
+        <div class="container">
+
+            <div class="section-header" data-animate>
+                <span class="section-tag">// projetos</span>
+                <h2 class="section-title">O que eu construí?</h2>
+                <p class="section-subtitle">Projetos reais desenvolvidos para resolver problemas reais</p>
+            </div>
+
+            <div class="projetos-grid">
+
+                <!-- ─── Projeto 1: Controle de Caixa ─── -->
+                <div class="projeto-card destaque" data-animate>
+                    <span class="projeto-badge">Entregue · Fev – Mar 2026</span>
+
+                    <div class="projeto-imagem">
+                        <img src="imagens/projeto-controle-caixa.png" alt="Sistema Controle de Caixa">
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://github.com/diegogobbisdev/controledecaixa" target="_blank" class="projeto-link" title="Ver código no GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://controledecaixa-eight.vercel.app/login.html" target="_blank" class="projeto-link" title="Abrir demo ao vivo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="projeto-info">
+                        <h3>Controle de Caixa</h3>
+                        <p>
+                            Sistema web desenvolvido para resolver um problema real na empresa onde trabalho.
+                            O fechamento de caixa era feito manualmente com erros frequentes e o controle de
+                            cheques era uma planilha desorganizada. <strong>Utilizado diariamente pelos
+                            funcionários</strong>, eliminou os erros de fechamento e centralizou todo o
+                            controle financeiro em um único lugar — sem instalação ou servidor.
+                        </p>
+                        <ul class="projeto-destaques">
+                            <li><i class="fas fa-check"></i> Eliminou erros manuais no fechamento de caixa diário</li>
+                            <li><i class="fas fa-check"></i> Alertas automáticos de cheques vencendo</li>
+                            <li><i class="fas fa-check"></i> Autenticação por usuário com histórico de sessões</li>
+                            <li><i class="fas fa-check"></i> Relatórios formatados para impressão</li>
+                        </ul>
+                        <div class="projeto-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>LocalStorage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Projeto 2: JoiÓtica Landing Page ─── -->
+                <div class="projeto-card" data-animate>
+                    <span class="projeto-badge">Entregue · Mar – Abr 2026</span>
+
+                    <div class="projeto-imagem">
+                        <img src="imagens/projeto - landing page joiotica.png" alt="JoiÓtica — Landing Page">
+                        <div class="projeto-overlay">
+                            <div class="projeto-links">
+                                <a href="https://github.com/diegogobbisdev/Landing-Page-JoiOtica" target="_blank" class="projeto-link" title="Ver código no GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://landing-page-joiotica.vercel.app/" target="_blank" class="projeto-link" title="Abrir demo ao vivo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="projeto-info">
+                        <h3>JoiÓtica — Landing Page</h3>
+                        <p>
+                            Landing page desenvolvida para uma joalheria e ótica real, atualmente
+                            em uso pelo cliente. Apresenta catálogo interativo por categoria,
+                            menu mobile deslizante e CTA direto via WhatsApp para conversão de clientes.
+                        </p>
+                        <ul class="projeto-destaques">
+                            <li><i class="fas fa-check"></i> Catálogo com 4 categorias via toggleCategoria()</li>
+                            <li><i class="fas fa-check"></i> Menu mobile deslizante com bloqueio de scroll</li>
+                            <li><i class="fas fa-check"></i> Layout responsivo em 3 breakpoints</li>
+                        </ul>
+                        <div class="projeto-tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Responsivo</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Link para o GitHub com todos os outros projetos -->
+            <div class="mais-projetos" data-animate>
+                <p>Mais projetos em</p>
+                <a href="https://github.com/diegogobbisdev" target="_blank" class="btn-github-cta">
+                    <i class="fab fa-github"></i>
+                    github.com/diegogobbisdev
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         CERTIFICADOS — FORMAÇÃO E CURSOS
+    ============================================ -->
+    <section class="certificados" id="certificados">
+        <div class="container">
+
+            <div class="section-header" data-animate>
+                <span class="section-tag">// certificados</span>
+                <h2 class="section-title">Formação e Cursos</h2>
+                <p class="section-subtitle">Certificações que validam meu aprendizado contínuo</p>
+            </div>
+
+            <!-- Grade de certificados — clicável para ampliar -->
+            <div class="certs-grid">
+
+                <div class="cert-card" data-animate>
+                    <div class="cert-imagem">
+                        <img src="imagens/curso - santander front-end.jpg" alt="Santander Bootcamp Front-End">
+                        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="cert-info">
+                        <h4>Santander — Front-End</h4>
+                        <span class="cert-badge">Bootcamp</span>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-animate>
+                    <div class="cert-imagem">
+                        <img src="imagens/curso - html developer.jpg" alt="HTML Developer">
+                        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="cert-info">
+                        <h4>HTML Developer</h4>
+                        <span class="cert-badge">Certificação</span>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-animate>
+                    <div class="cert-imagem">
+                        <img src="imagens/curso - css web developer.jpg" alt="CSS Web Developer">
+                        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="cert-info">
+                        <h4>CSS Web Developer</h4>
+                        <span class="cert-badge">Certificação</span>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-animate>
+                    <div class="cert-imagem">
+                        <img src="imagens/curso - javascritp developer.jpg" alt="JavaScript Developer">
+                        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="cert-info">
+                        <h4>JavaScript Developer</h4>
+                        <span class="cert-badge">Certificação</span>
+                    </div>
+                </div>
+
+                <div class="cert-card" data-animate>
+                    <div class="cert-imagem">
+                        <img src="imagens/curso - ri happy.jpg" alt="Ri Happy — Front-End do Zero">
+                        <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+                    </div>
+                    <div class="cert-info">
+                        <h4>Ri Happy — Front-End do Zero</h4>
+                        <span class="cert-badge">Bootcamp</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal para visualizar certificado em tela cheia -->
+        <div class="cert-modal" id="cert-modal">
+            <div class="cert-modal-overlay" id="cert-modal-overlay"></div>
+            <div class="cert-modal-content">
+                <button class="cert-modal-close" id="cert-modal-close" aria-label="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="" alt="Certificado ampliado" id="cert-modal-img">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         CONTATO — FORMULÁRIO E LINKS SOCIAIS
+    ============================================ -->
+    <section class="contato" id="contato">
+        <div class="container">
+
+            <div class="section-header" data-animate>
+                <span class="section-tag">// contato</span>
+                <h2 class="section-title">Vamos trabalhar juntos?</h2>
+                <p class="section-subtitle">Estou aberto a novas oportunidades e projetos interessantes</p>
+            </div>
+
+            <div class="contato-grid">
+
+                <!-- Informações de contato -->
+                <div class="contato-info" data-animate>
+                    <h3>Entre em contato</h3>
+                    <p>
+                        Se você tem uma ideia, um projeto ou uma oportunidade de trabalho,
+                        adoraria conversar. Respondo em até 24 horas.
+                    </p>
+
+                    <div class="contato-links">
+
+                        <a href="mailto:diegogobbisdev@gmail.com" class="contato-item">
+                            <div class="contato-icon email">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="contato-label">E-mail</span>
+                                <span class="contato-value">diegogobbisdev@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <a href="https://wa.me/5534997666593" target="_blank" class="contato-item">
+                            <div class="contato-icon whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <span class="contato-label">WhatsApp</span>
+                                <span class="contato-value">(34) 99766-6593</span>
+                            </div>
+                        </a>
+
+                        <a href="https://linkedin.com/in/diegogobbis" target="_blank" class="contato-item">
+                            <div class="contato-icon linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <span class="contato-label">LinkedIn</span>
+                                <span class="contato-value">linkedin.com/in/diegogobbis</span>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/diegogobbisdev" target="_blank" class="contato-item">
+                            <div class="contato-icon github">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <span class="contato-label">GitHub</span>
+                                <span class="contato-value">github.com/diegogobbisdev</span>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Formulário de contato -->
+                <div class="contato-form-wrapper" data-animate>
+                    <form class="contato-form" id="contato-form" onsubmit="enviarWhatsApp(event)" novalidate>
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome"
+                                   placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="assunto">Assunto</label>
+                            <input type="text" id="assunto" name="assunto"
+                                   placeholder="Sobre o que deseja falar?">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="5"
+                                      placeholder="Descreva seu projeto ou oportunidade..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline btn-full">
+                            Enviar Mensagem <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         RODAPÉ
+    ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#hero" class="footer-logo">
+                    <span class="logo-bracket">&lt;</span>DG<span class="logo-bracket"> /&gt;</span>
+                </a>
+                <p>Desenvolvido por Diego Gobbis &copy; 2025</p>
+                <div class="footer-socials">
+                    <a href="https://github.com/diegogobbisdev"      target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/diegogobbis" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/5534997666593"         target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Script principal do portfólio -->
+    <script src="js/main.js"></script>
+</body>
+</html>
