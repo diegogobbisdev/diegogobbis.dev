@@ -129,33 +129,16 @@ button { font-family: inherit; }
     box-shadow: 0 8px 32px var(--accent-glow);
 }
 
-/* Botão com borda + efeito de preenchimento deslizante da esquerda para a direita */
+/* Botão com borda */
 .btn-outline {
-    position: relative;
-    overflow: hidden;
     background: transparent;
     color: var(--accent);
     border: 2px solid var(--accent);
-    z-index: 0;
 }
 
-/* Camada de fundo que desliza ao hover */
-.btn-outline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradiente-hover);
-    transform: translateX(-105%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-}
-
-.btn-outline:hover::before { transform: translateX(0); }
 .btn-outline:hover {
-    color: #fff;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px var(--accent-glow);
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
 /* Botão que ocupa 100% da largura */
@@ -316,28 +299,14 @@ button { font-family: inherit; }
 
 /* Variante outline para o botão da navbar */
 .btn-nav.btn-nav-outline {
-    position: relative;
-    overflow: hidden;
     background: transparent;
     color: var(--accent);
     border: 2px solid var(--accent);
-    z-index: 0;
 }
-.btn-nav.btn-nav-outline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradiente-hover);
-    transform: translateX(-105%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-}
-.btn-nav.btn-nav-outline:hover::before { transform: translateX(0); }
+
 .btn-nav.btn-nav-outline:hover {
-    color: #fff;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--accent-glow);
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
 /* Hambúrguer (oculto no desktop) */
@@ -1021,29 +990,12 @@ button { font-family: inherit; }
     font-size: 16px;
     font-weight: 600;
     font-family: var(--fonte-ui);
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
     transition: var(--transicao);
 }
 
-/* Mesmo efeito de slide dos outros botões */
-.btn-github-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradiente-hover);
-    transform: translateX(-105%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-}
-
-.btn-github-cta:hover::before { transform: translateX(0); }
 .btn-github-cta:hover {
-    color: #fff;
-    border-color: transparent;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 32px var(--accent-glow);
+    transform: scale(1.04);
+    box-shadow: 0 8px 28px var(--accent-glow);
 }
 
 .btn-github-cta i {
